@@ -7,13 +7,16 @@ import Product from './Product'
 function App() {
 
   return (
+      <div className="bg-black text-white min-h-screen">
     <Router>
       <Switch>
         <Route exact path='/'>        
       <>
-        <div>
-          <h1>Welcome to the best website</h1>
+        <div className='grid place-content-center h-screen text-center'>
+          <h1 className='text-3xl font-bold'>My product website</h1>
+          <div className="py-5 font-semibold underline">
           <Link to='/products'>View products</Link>
+          </div>
         </div>
       </>
         </Route>
@@ -25,6 +28,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
+      </div>
   )
 }
 
