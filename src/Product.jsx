@@ -24,16 +24,18 @@ const clickCheck = () => setCheck(!check);
                 setThumb(data.thumbnail);
                 
             })
- }, [])
+ })
 
  function validateEmail() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
         setError(true);
+        document.getElementById("emailInput").classList.add("bg-red-400")
         return false;
     } else {
-        setError(false);
+        document.getElementById("emailInput").classList.remove("bg-red-400")
+        
         return true
     }
    
@@ -41,17 +43,37 @@ const clickCheck = () => setCheck(!check);
 
  function validateName() {
     if (username === '') {
-        return false;
+        document.getElementById("nameInput").classList.add("bg-red-400")
+        setError(true);
+        return false;        
     }
+    document.getElementById("nameInput").classList.remove("bg-red-400")
+    
     return true;
+ }
+
+ function validateCheck() {
+    if (!check) {
+        document.getElementById("checkLabel").classList.add("text-red-500")
+        setError(true);       
+    } else if (check) {
+        document.getElementById("checkLabel").classList.remove("text-red-500")
+              
+    }
  }
 
  const handleSubmit = (e) => {
     e.preventDefault();
     validateEmail();
-    if (validateEmail && validateName && check) {
+    validateName();
+    validateCheck();
+    console.log(error)
+    if (validateEmail() && validateName() && check) {
         setSuccess(true);
-        console.log(username, email, "does he really want it?", check, "product id:",id)
+        console.log("Name:", username)
+        console.log("Email:", email)
+        console.log("Does he really want it?", check)
+        console.log("Product id:", id)
     }
  }
 
@@ -74,11 +96,11 @@ const clickCheck = () => setCheck(!check);
                 <div className="flex flex-col text-center">
                 <h2 className={`"font-semibold ${error ? "text-red-500" : "text-white"}`}>{!error ? "Want this?" : "You don't want it bad enough"}</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col">
-                <input type="text" placeholder="Your Name" onChange={(e) => setUsername(e.target.value)} className={`"p-1 my-2 text-black ${username === '' ? "border-red-500" : "border-slate-500"}`}/>
-                <input type="text" placeholder="Your Email" onChange={(e)=>setEmail(e.target.value)} className={`"p-1 my-2 text-black ${!validateEmail ? "border-red-500" : "border-slate-500"}`}/>
+                <input type="text" id="nameInput" placeholder="Your Name" onChange={(e) => setUsername(e.target.value)} className={`p-1 my-2 text-black`}/>
+                <input type="text" id="emailInput" placeholder="Your Email" onChange={(e)=>setEmail(e.target.value)} className={`p-1 my-2 text-black`}/>
                 <div>
                 <input type="checkbox" onClick={clickCheck} name="check" id="check" />
-                <label className="pl-2" htmlFor="check">Do you really want it?</label>
+                <label className="pl-2" id="checkLabel" htmlFor="check">Do you really want it?</label>
                 </div>
                 <button type="submit" className="border p-1 rounded-full mt-5 hover:bg-slate-600">I want this!</button>
             </form>

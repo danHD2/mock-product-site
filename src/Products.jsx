@@ -4,7 +4,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min"
 function Products() {
     const [products, setProducts] = useState(null);
     useEffect(()=>{
-        fetch('../Data/products.json')
+        fetch('./Data/products.json')
             .then(res => {
             return res.json()
             })
@@ -23,7 +23,7 @@ function Products() {
             
             <div className="flex flex-col">
             {Array.isArray(products) && products.map((product) => {
-                return <Link key={product.id} to={`product/${product.id}`}><div className="border my-1">{product.name}<p className="text-red-400 text-xs"> {product.stock ? "" : "Out of stock"}</p></div></Link>
+                return <Link key={product.id} to={`product/${product.id}`} className={`${product.stock ? "pointer-events-auto" : "pointer-events-none"}`}><div className="border my-1 p-2">{product.name}<p className="text-red-400 text-xs"> {product.stock ? "" : "Out of stock"}</p></div></Link>
             })}
             </div>
 
