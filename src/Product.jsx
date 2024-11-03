@@ -34,8 +34,7 @@ const clickCheck = () => setCheck(!check);
         document.getElementById("emailInput").classList.add("bg-red-400")
         return false;
     } else {
-        document.getElementById("emailInput").classList.remove("bg-red-400")
-        
+        document.getElementById("emailInput").classList.remove("bg-red-400")        
         return true
     }
    
@@ -67,7 +66,6 @@ const clickCheck = () => setCheck(!check);
     validateEmail();
     validateName();
     validateCheck();
-    console.log(error)
     if (validateEmail() && validateName() && check) {
         setSuccess(true);
         console.log("Name:", username)
