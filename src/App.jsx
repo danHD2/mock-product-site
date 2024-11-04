@@ -7,7 +7,7 @@ import Product from './Product'
 function App() {
 
   return (
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-gradient-to-b from-gray-900 text-white min-h-screen">
     <Router>
       <Switch>
         <Route exact path='/'>        
